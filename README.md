@@ -1,53 +1,112 @@
-# Chat-app
+# Chap App v2
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+## 1. Install CLI and create the app
 
-## Prerequisites
+```
+$ npm install -g ember-cli
 
-You will need the following things properly installed on your computer.
+$ ember new chat-app
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+$ cd chat-app
 
-## Installation
+$ ember server
+```
+- [http://localhost:4200](http://localhost:4200)
+- Ember Inspector
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+## 2. Add bootstrap and some css
 
-## Running / Development
+Searching bootstrap package: [http://www.emberaddons.com](http://www.emberaddons.com)
 
-* `ember server`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+```
+$ ember install ember-bootstrap
+```
 
-### Code Generators
+Some extra style in `app/styles/app.css`
 
-Make use of the many generators for code, try `ember help generate` for more details
+```
+body {
+  padding-bottom: 70px;
+}
 
-### Running Tests
+.message-bar {
+  height: 70px;
+  padding-top: 13px;
+}
 
-* `ember test`
-* `ember test --server`
+.alert-chat {
+  padding: 5px;
+}
 
-### Building
+.label-user {
+  font-size: 100%;
+  font-weight: normal;
+}
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+.close-chat {
+  line-height: 18px;
+}
+```
 
-### Deploying
+## 3. Add header to the main template
 
-Specify what it takes to deploy your app.
+`/app/templates/application.hbs`
 
-## Further Reading / Useful Links
+```html
+<div class="container">
+  <div class="page-header">
+    <h1>Meetup Chat App
+      <small>Let's talk about Ember</small>
+    </h1>
+  </div>
 
-* [ember.js](http://emberjs.com/)
-* [ember-cli](http://www.ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+  {{outlet}}
+</div>
+```
 
+## 4. Create two pages: index and chat
+
+```
+$ ember generate template index
+```
+
+Add content to index
+
+```
+<h1>Index</h1>
+```
+
+```
+ember generate route chat
+```
+
+## Add dynamic segment to `chat` route
+
+`app/router.js`
+
+```
+this.route('chat', { path: '/chat/:user_name' } );
+```
+
+## Input box with condition on index page
+
+`app/templates/index.hbs`
+
+```html
+<div class="jumbotron text-center">
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4">
+          {{input class='form-control input-lg' placeholder="Enter your name." value=name}}
+        </div>
+
+        <div class="col-md-4 col-md-offset-4">
+          {{#if name}}
+              <h2>Please join to the chat {{name}}!</h2>
+            {{#link-to 'chat' name class="btn btn-lg btn-success"}}Join{{/link-to}}
+          {{else}}
+              <p>Please enter your nickname and click the join button.</p>
+          {{/if}}
+        </div>
+    </div>
+</div>
+```

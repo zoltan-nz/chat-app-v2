@@ -80,7 +80,7 @@ Add content to index
 ember generate route chat
 ```
 
-## Add dynamic segment to `chat` route
+## 5. Add dynamic segment to `chat` route
 
 `app/router.js`
 
@@ -88,7 +88,7 @@ ember generate route chat
 this.route('chat', { path: '/chat/:user_name' } );
 ```
 
-## Input box with condition on index page
+## 6. Input box with condition on index page
 
 `app/templates/index.hbs`
 
@@ -110,3 +110,25 @@ this.route('chat', { path: '/chat/:user_name' } );
     </div>
 </div>
 ```
+
+## 7. Setup our backend (Firebase)
+
+[Firebase](http://www.firebase.com)
+
+```
+ember install emberfire
+```
+
+`config/environment.js`
+
+```
+firebase: 'https://meetup-chat-app.firebaseio.com/',
+```
+
+## 8. Let's create our model
+
+```
+ember generate model message user:string text:string
+```
+
+Test it in Ember Inspector and check on Firebase.

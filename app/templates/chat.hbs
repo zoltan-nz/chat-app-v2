@@ -1,0 +1,14 @@
+<div class="navbar navbar-default navbar-fixed-bottom message-bar">
+    <div class="container">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-xs-10">
+                  {{input class='form-control input-lg input-block' placeholder='Your message' value=textMessageFromInput}}
+                </div>
+                <div class="col-xs-2">
+                    <button type="submit" class="btn btn-primary btn-lg" {{action 'createMessage' textMessageFromInput}}>Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

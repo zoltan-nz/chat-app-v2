@@ -132,3 +132,53 @@ ember generate model message user:string text:string
 ```
 
 Test it in Ember Inspector and check on Firebase.
+
+## 9. Add create message field to the chat screen
+
+`app/templates/chat.hbs`
+
+```html
+<div class="navbar navbar-default navbar-fixed-bottom message-bar">
+    <div class="container">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-xs-10">
+                  {{input class='form-control input-lg input-block' placeholder='Your message' value=textMessageFromInput}}
+                </div>
+                <div class="col-xs-2">
+                    <button type="submit" class="btn btn-primary btn-lg" {{action 'createMessage' textMessageFromInput}}>Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+```
+
+`app/routes/chat.js`
+
+Create the action:
+
+```javascript
+  actions: {
+    createMessage(message) {
+      let newRecord = this.store.createRecord('message', {
+        text: message,
+        user: 'Joe'
+      });
+
+      newRecord.save();
+
+      this.controller.set('textMessageFromInput', '');
+    }
+  }
+```
+
+## 10. Download chat messages from the server
+
+`app/routes/chat.js`
+
+```
+  model() {
+    return this.store.findAll('message');
+  }
+```

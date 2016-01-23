@@ -1,3 +1,9 @@
+{{#each model as |message|}}
+    <div class="alert alert-warning alert-chat">
+        <p><span class="label label-warning label-user">{{message.user}}</span> {{message.text}}</p>
+    </div>
+{{/each}}
+
 <div class="navbar navbar-default navbar-fixed-bottom message-bar">
     <div class="container">
         <form class="form-horizontal">

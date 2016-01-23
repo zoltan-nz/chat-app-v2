@@ -178,7 +178,22 @@ Create the action:
 `app/routes/chat.js`
 
 ```
-  model() {
+  userFromParams: null,
+
+  model(params) {
+    this.set('userFromParams', params.user_name);
     return this.store.findAll('message');
   }
+```
+
+Iterate trough the downloaded model on chat page:
+
+`app/templates/chat.hbs`
+
+```html
+{{#each model as |message|}}
+    <div class="alert alert-warning alert-chat">
+        <p><span class="label label-warning label-user">{{message.user}}</span> {{message.text}}</p>
+    </div>
+{{/each}}
 ```

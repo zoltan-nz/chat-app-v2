@@ -197,3 +197,40 @@ Iterate trough the downloaded model on chat page:
     </div>
 {{/each}}
 ```
+
+## Build the production code
+
+```
+$ ember build --prod
+```
+
+Using firebase tools for deployment
+
+```
+$ npm install -g firebase-tools
+```
+
+```
+$ firebase login
+```
+
+```
+$ firebase init
+```
+
+Update `firebase.json`
+
+```json
+{
+  "firebase": "meetup-chat-app",
+  "public": "dist",
+  "rewrites": [{
+    "source": "**",
+    "destination": "/index.html"
+  }]
+}
+```
+
+```
+$ firebase deploy
+```

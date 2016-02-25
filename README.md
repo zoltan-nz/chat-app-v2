@@ -42,10 +42,6 @@ body {
   font-size: 100%;
   font-weight: normal;
 }
-
-.close-chat {
-  line-height: 18px;
-}
 ```
 
 ## 3. Add header to the main template
@@ -146,7 +142,7 @@ Test it in Ember Inspector and check on Firebase.
                   {{input class='form-control input-lg input-block' placeholder='Your message' value=textMessageFromInput}}
                 </div>
                 <div class="col-xs-2">
-                    <button type="submit" class="btn btn-primary btn-lg" {{action 'createMessage' textMessageFromInput}}>Send</button>
+                  <button type="submit" class="btn btn-primary btn-lg" {{action 'createMessage' textMessageFromInput}}>Send</button>
                 </div>
             </div>
         </form>
@@ -222,7 +218,7 @@ Update `firebase.json`
 
 ```json
 {
-  "firebase": "meetup-chat-app",
+  "firebase": "YOUR-APP-NAME-ON-FIREBASE",
   "public": "dist",
   "rewrites": [{
     "source": "**",

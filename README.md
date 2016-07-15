@@ -14,6 +14,8 @@ $ ember server
 - [http://localhost:4200](http://localhost:4200)
 - Ember Inspector
 
+$ ember g template application
+
 ## 2. Add bootstrap and some css
 
 Searching bootstrap package: [http://www.emberaddons.com](http://www.emberaddons.com)
@@ -42,6 +44,14 @@ body {
   font-size: 100%;
   font-weight: normal;
 }
+
+.nav-links {
+  padding: 10px;
+}
+
+.nav-links a.active {
+  text-decoration: underline;
+}
 ```
 
 ## 3. Add header to the main template
@@ -51,13 +61,27 @@ body {
 ```html
 <div class="container">
   <div class="page-header">
-    <h1>Meetup Chat App
+    <h1>WDC Mini Chat
       <small>Let's talk about Ember</small>
     </h1>
+    <div class="pull-right nav-links">
+      {{#link-to "index"}}Home{{/link-to}} |
+    </div>
   </div>
 
   {{outlet}}
 </div>
+```
+
+Create an extra About route:
+
+```
+$ ember g route about
+```
+Add the link to the header
+
+```
+{{#link-to "about"}}About{{/link-to}}
 ```
 
 ## 4. Create two pages: index and chat
@@ -112,7 +136,7 @@ this.route('chat', { path: '/chat/:user_name' } );
 [Firebase](http://www.firebase.com)
 
 ```
-$ ember install emberfire
+$ ember install emberfire@1.6.5
 ```
 
 `config/environment.js`
@@ -200,6 +224,8 @@ Iterate trough the downloaded model on chat page:
 $ ember build --prod
 ```
 
+### Deploy with Firebase
+
 Using firebase tools for deployment
 
 ```
@@ -230,3 +256,16 @@ Update `firebase.json`
 ```
 $ firebase deploy
 ```
+
+### Deploy with Surge
+
+```
+$ cd ./dist
+$ cp index.html 200.html
+```
+
+```
+$ surge
+```
+
+More details about surge: http://surge.sh
